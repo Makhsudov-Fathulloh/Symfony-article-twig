@@ -18,3 +18,15 @@ Open a PowerShell terminal
 > symfony server:start
 
   http://localhost:8000/
+  
+> composer require doctrine > (n) >
+
+> composer require annotations
+
+> composer require symfony/orm-pack
+
+> composer require --dev symfony/maker-bundle
+
+> symfony console make:controller ArticleController 
+
+> composer require twig
