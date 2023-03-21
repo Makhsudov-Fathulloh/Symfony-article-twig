@@ -19,6 +19,7 @@ Open a PowerShell terminal
 
   http://localhost:8000/
   
+  
 > composer require doctrine > (n) >
 
 > composer require annotations
@@ -30,3 +31,16 @@ Open a PowerShell terminal
 > symfony console make:controller ArticleController 
 
 > composer require twig
+
+
+> symfony console doctrine:database:create
+
+> symfony console make:entity
+    (Article > symfony console make:migration > symfony console doctrine:magration:migrate, 
+     User > symfony console make:migration > symfony console doctrine:magration:migrate)
+     
+> symfony console make:entity (Article > user > relation > User > ManyToOne > no > yes > [Enter] > no > Success)
+
+> symfony console make:migration
+
+> symfony console doctrine:magration:migrate
