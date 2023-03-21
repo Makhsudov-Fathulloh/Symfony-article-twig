@@ -9,6 +9,8 @@ Open a PowerShell terminal
 > irm get.scoop.sh | iex
 
 > symfony check:requirements
+
+1.
 > composer create-project symfony/skeleton article-twig
 
 > symfony check:requirements
@@ -19,7 +21,7 @@ Open a PowerShell terminal
 
   http://localhost:8000/
   
-  
+2. 
 > composer require doctrine > (n) >
 
 > composer require annotations
@@ -32,7 +34,7 @@ Open a PowerShell terminal
 
 > composer require twig
 
-
+3.
 > symfony console doctrine:database:create
 
 > symfony console make:entity
@@ -44,3 +46,15 @@ Open a PowerShell terminal
 > symfony console make:migration
 
 > symfony console doctrine:magration:migrate
+
+4.
+> composer require --dev doctrine/doctrine-fixtures-bundle
+
+> symfony console doctrine:fixtures:load
+
+> Add fixtures file and fillar (ArticleFixtures, UserFixtures)
+
+  https://symfony.com/bundles/DoctrineFixturesBundle/current/index.html#loading-the-fixture-files-in-order
+  (Loading the Fixture Files in Order)
+  
+> symfony console doctrine:fixtures:load
