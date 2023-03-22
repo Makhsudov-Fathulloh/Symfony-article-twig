@@ -58,3 +58,20 @@ Open a PowerShell terminal
   (Loading the Fixture Files in Order)
   
 > symfony console doctrine:fixtures:load
+
+
+5. 
+> node -v
+
+> composer require symfony/webpack-encore-bundle
+
+> npm install
+> npm run watch
+> npm install bootstrap --save--dev
+> npm run dev 
+
+> composer require symfony/asset
+> npm run dev 
+
+
+6.
