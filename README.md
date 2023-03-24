@@ -10,6 +10,7 @@ Open a PowerShell terminal
 
 > symfony check:requirements
 
+
 1.
 > composer create-project symfony/skeleton article-twig
 > cd article-twig
@@ -21,7 +22,8 @@ Open a PowerShell terminal
 > symfony server:start
 
   http://localhost:8000/
-  
+
+
 2. 
 > composer require doctrine > (n) >
 
@@ -29,9 +31,7 @@ Open a PowerShell terminal
 
 > composer require --dev symfony/maker-bundle
 
-> composer require twig
- 
-> symfony console make:controller ArticleController 
+> composer require twig 
 
 
 3.
@@ -46,6 +46,8 @@ Open a PowerShell terminal
 > symfony console make:migration
 
 > symfony console doctrine:magration:migrate
+
+> symfony console make:controller ArticleController
 
 
 4.
