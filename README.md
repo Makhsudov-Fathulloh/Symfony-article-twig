@@ -12,10 +12,11 @@ Open a PowerShell terminal
 
 1.
 > composer create-project symfony/skeleton article-twig
+> cd article-twig
 
-> symfony check:requirements
 > composer install
 > php bin/console about
+> symfony check:requirements
 
 > symfony server:start
 
@@ -24,15 +25,14 @@ Open a PowerShell terminal
 2. 
 > composer require doctrine > (n) >
 
-> composer require annotations
-
 > composer require symfony/orm-pack
 
 > composer require --dev symfony/maker-bundle
 
+> composer require twig
+ 
 > symfony console make:controller ArticleController 
 
-> composer require twig
 
 3.
 > symfony console doctrine:database:create
@@ -46,6 +46,7 @@ Open a PowerShell terminal
 > symfony console make:migration
 
 > symfony console doctrine:magration:migrate
+
 
 4.
 > composer require --dev doctrine/doctrine-fixtures-bundle
@@ -75,3 +76,5 @@ Open a PowerShell terminal
 
 
 6.
+composer require --dev 
+
