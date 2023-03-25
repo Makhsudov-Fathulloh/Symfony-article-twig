@@ -73,16 +73,6 @@ Open a PowerShell terminal
 
 
 5. 
-> composer require symfony/webpack-encore-bundle
-> npm install
-> npm run watch
-> npm install bootstrap --save--dev
-> npm run dev 
-
-> composer require symfony/asset
-> npm run dev 
 
 
-6.
-composer require --dev 
 
