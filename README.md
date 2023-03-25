@@ -15,6 +15,7 @@ Open a PowerShell terminal
 > composer create-project symfony/skeleton article-twig
 > cd article-twig
 
+> composer require annotations
 > composer install
 > php bin/console about
 > symfony check:requirements
@@ -38,14 +39,20 @@ Open a PowerShell terminal
 > symfony console doctrine:database:create
 
 > symfony console make:entity
-    (Article > symfony console make:migration > symfony console doctrine:magration:migrate, 
-     User > symfony console make:migration > symfony console doctrine:magration:migrate)
+    (Article
+       > symfony console make:migration 
+       > symfony console doctrine:magration:migrate, 
+       
+     User 
+       > symfony console make:migration 
+       > symfony console doctrine:magration:migrate)
+       
      
 > symfony console make:entity (Article > user > relation > User > ManyToOne > no > yes > [Enter] > no > Success)
 
 > symfony console make:migration
 
-> symfony console doctrine:magration:migrate
+> symfony console doctrine:migration:migrate
 
 > symfony console make:controller ArticleController
 
