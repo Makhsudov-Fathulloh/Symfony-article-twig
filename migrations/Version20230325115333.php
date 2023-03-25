@@ -10,17 +10,17 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20230321165145 extends AbstractMigration
+final class Version20230325115333 extends AbstractMigration
 {
     public function getDescription(): string
     {
-        return 'Relation Article->User';
+        return 'Relation article & user';
     }
 
     public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER TABLE article ADD user_id INT DEFAULT NULL');
+        $this->addSql('ALTER TABLE article ADD user_id INT NOT NULL');
         $this->addSql('ALTER TABLE article ADD CONSTRAINT FK_23A0E66A76ED395 FOREIGN KEY (user_id) REFERENCES user (id)');
         $this->addSql('CREATE INDEX IDX_23A0E66A76ED395 ON article (user_id)');
     }

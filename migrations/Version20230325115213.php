@@ -10,11 +10,11 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20230321160719 extends AbstractMigration
+final class Version20230325115213 extends AbstractMigration
 {
     public function getDescription(): string
     {
-        return 'User';
+        return 'Create user table';
     }
 
     public function up(Schema $schema): void

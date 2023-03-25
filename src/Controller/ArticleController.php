@@ -13,34 +13,32 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class ArticleController extends AbstractController
 {
     private $em;
-    public function __construct(EntityManagerInterface $em)
+    private $articleRepository;
+
+    public function __construct(EntityManagerInterface $em, ArticleRepository $articleRepository)
     {
         $this->em = $em;
+        $this->articleRepository = $articleRepository;
     }
 
-    #[Route('/article', name: 'article')]
+    #[Route('/article', methods: ['GET'], name: 'articles')]
     public function index(): Response
-    /* Method 2 public function index(ArticleRepository $articleRepository): Response
-     {
-         $article = $articleRepository->findAll(); */
     {
-        //Sql
-        //findAll() - SELECT * FROM movies;
-        //find() - SELECT * from movies WHERE id = 1;
-        //findBy() - SELECT * FROM movies ORDER BY id DESC;
-        //findOneBy() - SELECT * from movies WHERE id = 1 AND title = 'Lorem ipsum 2'
-        //count() - SELECT COUNT(id) FROM movies
+        $articles = $this->articleRepository->findAll();
 
-        /* $repository = $this->em->getRepository(Article::class);
-        $article = $repository->findAll(); */
+        return $this->render('articles/index.html.twig', [
+            'articles' => $articles
+        ]);
+    }
 
-        //Commands
-        //$article = $this->repository->findAll();
-        //$article = $this->repository->find(1);
-        //$article = $this->repository->findBy([], ['id' => 'DESC']);
-        //$article = $this->repository->findOneBy(['id' => 1, 'title' => 'Lorem ipsum 2', []]);
-        //$article = $this->repository->count([]);
 
-        return $this->render('index.html.twig');
+    #[Route('/article{id}', methods: ['GET'], name: 'show')]
+    public function show($id): Response
+    {
+        $article = $this->articleRepository->find($id);
+
+        return $this->render('articles/show.html.twig', [
+            'article' => $article
+        ]);
     }
 }

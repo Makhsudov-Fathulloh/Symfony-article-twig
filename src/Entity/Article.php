@@ -17,18 +17,18 @@ class Article
     #[ORM\Column(length: 255)]
     private ?string $title = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(length: 255)]
     private ?string $description = null;
 
     #[ORM\Column(type: Types::TEXT)]
     private ?string $text = null;
 
-    #[ORM\ManyToOne(inversedBy: 'articles')]
-    #[ORM\JoinColumn(nullable: true)]
-    private ?User $user = null;
-
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $imagePath = null;
+    private ?string $image_path = null;
+
+    #[ORM\ManyToOne(inversedBy: 'articles')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $user = null;
 
     public function getId(): ?int
     {
@@ -52,7 +52,7 @@ class Article
         return $this->description;
     }
 
-    public function setDescription(?string $description): self
+    public function setDescription(string $description): self
     {
         $this->description = $description;
 
@@ -71,6 +71,18 @@ class Article
         return $this;
     }
 
+    public function getImagePath(): ?string
+    {
+        return $this->image_path;
+    }
+
+    public function setImagePath(?string $image_path): self
+    {
+        $this->image_path = $image_path;
+
+        return $this;
+    }
+
     public function getUser(): ?User
     {
         return $this->user;
@@ -79,18 +91,6 @@ class Article
     public function setUser(?User $user): self
     {
         $this->user = $user;
-
-        return $this;
-    }
-
-    public function getImagePath(): ?string
-    {
-        return $this->imagePath;
-    }
-
-    public function setImagePath(?string $imagePath): self
-    {
-        $this->imagePath = $imagePath;
 
         return $this;
     }

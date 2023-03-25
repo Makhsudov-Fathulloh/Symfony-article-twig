@@ -8,21 +8,18 @@ use Doctrine\Persistence\ObjectManager;
 
 class UserFixtures extends Fixture
 {
+    public const ADMIN_USER_REFERENCE = 'admin-user';
+
     public function load(ObjectManager $manager): void
     {
-        $user = new User();
-        $user->setEmail('john@example.com');
-        $user->setPassword('secret123');
-        $manager->persist($user);
-
-        $user2 = new User();
-        $user2->setEmail('nik@example.com');
-        $user2->setPassword('secret123');
-        $manager->persist($user2);
-
+        $userAdmin = new User();
+        $userAdmin->setEmail('john@example.com');
+        $userAdmin->setPassword('secret123');
+        $manager->persist($userAdmin);
         $manager->flush();
 
-        $this->addReference('user_1', $user);
-        $this->addReference('user_2', $user2);
+        // other fixtures can get this object using the UserFixtures::ADMIN_USER_REFERENCE constant
+        $this->addReference('admin-user', $userAdmin);
+
     }
 }
