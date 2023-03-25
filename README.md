@@ -36,18 +36,20 @@ Open a PowerShell terminal
 
 
 3.
+
+> setting .env.local
 > symfony console doctrine:database:create
 
 > symfony console make:entity
     (Article
        > symfony console make:migration 
-       > symfony console doctrine:magration:migrate, 
+       > symfony console doctrine:migration:migrate, 
        
      User 
        > symfony console make:migration 
        > symfony console doctrine:magration:migrate)
        
-     
+
 > symfony console make:entity (Article > user > relation > User > ManyToOne > no > yes > [Enter] > no > Success)
 
 > symfony console make:migration
@@ -71,10 +73,7 @@ Open a PowerShell terminal
 
 
 5. 
-> node -v
-
 > composer require symfony/webpack-encore-bundle
-
 > npm install
 > npm run watch
 > npm install bootstrap --save--dev
