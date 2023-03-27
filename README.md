@@ -73,6 +73,11 @@ Open a PowerShell terminal
 
 
 5. 
+> composer require symfony/form
+
+> symfony console make:form ArticleFormType Article 
+
+> composer require symfony/form
 
 
 
