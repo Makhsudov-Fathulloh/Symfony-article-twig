@@ -30,15 +30,18 @@ class Article
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;
 
+
     public function getId(): ?int
     {
         return $this->id;
     }
 
+
     public function getTitle(): ?string
     {
         return $this->title;
     }
+
 
     public function setTitle(string $title): self
     {
@@ -47,10 +50,12 @@ class Article
         return $this;
     }
 
+
     public function getDescription(): ?string
     {
         return $this->description;
     }
+
 
     public function setDescription(string $description): self
     {
@@ -59,10 +64,12 @@ class Article
         return $this;
     }
 
+
     public function getText(): ?string
     {
         return $this->text;
     }
+
 
     public function setText(string $text): self
     {
@@ -76,6 +83,7 @@ class Article
         return $this->image_path;
     }
 
+
     public function setImagePath(?string $image_path): self
     {
         $this->image_path = $image_path;
@@ -83,10 +91,12 @@ class Article
         return $this;
     }
 
+
     public function getUser(): ?User
     {
         return $this->user;
     }
+
 
     public function setUser(?User $user): self
     {
