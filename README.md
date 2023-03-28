@@ -77,7 +77,16 @@ Open a PowerShell terminal
 
 > symfony console make:form ArticleFormType Article 
 
-> composer require symfony/form
+> composer require symfony/mime
+
+> composer require symfony/validator doctrine/annotations
+
+> composer require symfony/security-bundle
+
+> symfony console make:user (User > yes > email > yes > succes)
+
+> symfony console make:registrtion-form > (yes > no > yes > 1 > succes)
+
 
 
 
