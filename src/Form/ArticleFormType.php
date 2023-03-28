@@ -20,7 +20,8 @@ class ArticleFormType extends AbstractType
                     'class' => 'form-control mt-md-3',
                     'placeholder' => 'Input title'
                 ),
-                'label' => false
+                'label' => false,
+                'required' => false
             ])
 
             ->add('description', TextType::class, [
@@ -28,7 +29,8 @@ class ArticleFormType extends AbstractType
                     'class' => 'form-control mt-md-3',
                     'placeholder' => 'Input description'
                 ),
-                'label' => false
+                'label' => false,
+                'required' => false
             ])
 
             ->add('text', TextareaType::class, [
@@ -36,7 +38,8 @@ class ArticleFormType extends AbstractType
                     'class' => 'form-control mt-md-3',
                     'placeholder' => 'Input text'
                 ),
-                'label' => false
+                'label' => false,
+                'required' => false
             ])
 
 //            ->add('image_path', FileType::class, [

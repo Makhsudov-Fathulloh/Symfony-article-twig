@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\ArticleRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ArticleRepository::class)]
 class Article
@@ -15,21 +16,20 @@ class Article
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank]
+    #[Assert\Length(min: 3)]
     private ?string $title = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank]
     private ?string $description = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Assert\NotBlank]
     private ?string $text = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $image_path = null;
-
-    #[ORM\ManyToOne(inversedBy: 'articles')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?User $user = null;
-
 
     public function getId(): ?int
     {
@@ -43,7 +43,7 @@ class Article
     }
 
 
-    public function setTitle(string $title): self
+    public function setTitle(?string $title): self
     {
         $this->title = $title;
 
@@ -57,7 +57,7 @@ class Article
     }
 
 
-    public function setDescription(string $description): self
+    public function setDescription(?string $description): self
     {
         $this->description = $description;
 
@@ -71,7 +71,7 @@ class Article
     }
 
 
-    public function setText(string $text): self
+    public function setText(?string $text): self
     {
         $this->text = $text;
 
@@ -87,20 +87,6 @@ class Article
     public function setImagePath(?string $image_path): self
     {
         $this->image_path = $image_path;
-
-        return $this;
-    }
-
-
-    public function getUser(): ?User
-    {
-        return $this->user;
-    }
-
-
-    public function setUser(?User $user): self
-    {
-        $this->user = $user;
 
         return $this;
     }
