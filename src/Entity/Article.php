@@ -31,6 +31,10 @@ class Article
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $image_path = null;
 
+    #[ORM\ManyToOne(inversedBy: 'articles')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $user = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -87,6 +91,18 @@ class Article
     public function setImagePath(?string $image_path): self
     {
         $this->image_path = $image_path;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }

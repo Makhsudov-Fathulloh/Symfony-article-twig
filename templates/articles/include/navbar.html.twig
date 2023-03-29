@@ -13,11 +13,21 @@
 					<a class="nav-link" href="#">Link</a>
 				</li>
 			</ul>
+
+			{% if app.user %}
+				<a
+						href="/articles/create"
+						class="btn btn-success">
+					Add acticle
+				</a>
+			{% endif %}
+
 			<a
-					href="/articles/create"
+					href="/{{ app.user ? 'logout' : 'login'}}"
 					class="btn btn-success">
-				Add acticle
+				{{ app.user ? 'Logout' : 'Login'}}
 			</a>
+
 {#			<form class="d-flex" role="search">#}
 {#				<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">#}
 {#				<button class="btn btn-outline-success" type="submit">Search</button>#}
