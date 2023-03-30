@@ -87,6 +87,7 @@ Open a PowerShell terminal
 
 > symfony console make:registrtion-form > (yes > no > yes > 1 > succes)
 
+6.
 > symfony console make:auth (1 > LoginFormAuthenticator > SecurityController > yes > Success)
 
 > composer require knplabs/knp-paginator-bundle
