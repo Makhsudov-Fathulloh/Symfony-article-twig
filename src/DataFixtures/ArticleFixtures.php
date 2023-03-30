@@ -12,7 +12,7 @@ class ArticleFixtures extends Fixture implements DependentFixtureInterface
 {
   public function load(ObjectManager $manager): void
   {
-    for ($i = 1; $i < 6; $i++) {
+    for ($i = 1; $i < 20; $i++) {
       $product = new Article();
       $product->setTitle('Article '.$i);
       $product->setDescription('Lorem ipsum dolor sit amet, consectetur adipiscing elit');

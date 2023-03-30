@@ -56,7 +56,7 @@ class ArticleFormType extends AbstractType
                 'attr'=> array('class' => 'form-control mt-md-3 py-10')
             ))
 
-//            ->add('user')
+//           ->add('user')
         ;
     }
 

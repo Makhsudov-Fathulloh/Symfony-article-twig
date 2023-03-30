@@ -6,6 +6,7 @@ use App\Entity\Article;
 use App\Form\ArticleFormType;
 use App\Repository\ArticleRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
@@ -25,12 +26,21 @@ class ArticleController extends AbstractController
 
 
     #[Route('/article', methods: ['GET'], name: 'articles')]
-    public function index(): Response
-    {
-        $articles = $this->articleRepository->findAll();
+    public function index(
+        ArticleRepository $articleRepository,
+        Request $request,
+        PaginatorInterface $paginator
+    ): Response {
+        // $articles = $this->articleRepository->findAll();
 
+        $pagination = $paginator->paginate(
+            $articleRepository->paginationQuery(),
+            $request->query->getInt('page', 1),
+            8
+        );
         return $this->render('articles/index.html.twig', [
-            'articles' => $articles
+            // 'articles' => $articles
+            'pagination' => $pagination
         ]);
     }
 
@@ -40,10 +50,13 @@ class ArticleController extends AbstractController
     {
         $article = new Article();
         $form = $this->createForm(ArticleFormType::class, $article);
-
         $form->handleRequest($request);
+
         if ($form->isSubmitted() && $form->isValid()) {
             $newArticle = $form->getData();
+
+            $user = $this->getUser();
+            $article->setUser($user);
 
             $imagePath = $form->get('image_path')->getData();
             if ($imagePath) {
@@ -77,42 +90,45 @@ class ArticleController extends AbstractController
     public function edit($id, Request $request): Response
     {
         $article = $this->articleRepository->find($id);
-        $form = $this->createForm(ArticleFormType::class, $article);
 
+        $form = $this->createForm(ArticleFormType::class, $article);
         $form->handleRequest($request);
+
         $imagePath = $form->get('image_path')->getData();
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            if ($imagePath) {
-                if ($article->getImagePath() !== null) {
-                    if (file_exists(
-                        $this->getParameter('kernel.project_dir') . $article->getImagePath()
-                    )) {
-                        $this->getParameter('kernel.project_dir') . $article->getImagePath();
-                    }
-                    $newFileName = uniqid() . '.' . $imagePath->guessExtension();
+        if ($this->getUser() === $article->getUser($id)) {
+            if ($form->isSubmitted() && $form->isValid()) {
+                if ($imagePath) {
+                    if ($article->getImagePath() !== null) {
+                        if (file_exists(
+                            $this->getParameter('kernel.project_dir') . $article->getImagePath()
+                        )) {
+                            $this->getParameter('kernel.project_dir') . $article->getImagePath();
+                        }
+                        $newFileName = uniqid() . '.' . $imagePath->guessExtension();
 
-                    try {
-                        $imagePath->move(
-                            $this->getParameter('kernel.project_dir') . '/public/uploads',
-                            $newFileName
-                        );
-                    } catch (FileException $e) {
-                        return new Response($e->getMessage());
-                    }
+                        try {
+                            $imagePath->move(
+                                $this->getParameter('kernel.project_dir') . '/public/uploads',
+                                $newFileName
+                            );
+                        } catch (FileException $e) {
+                            return new Response($e->getMessage());
+                        }
 
-                    $article->setImagePath('/uploads/' . $newFileName);
+                        $article->setImagePath('/uploads/' . $newFileName);
+                        $this->em->flush();
+
+                        return $this->redirectToRoute('articles');
+                    }
+                } else {
+                    $article->setTitle($form->get('title')->getData());
+                    $article->setDescription($form->get('description')->getData());
+                    $article->setText($form->get('text')->getData());
+
                     $this->em->flush();
-
                     return $this->redirectToRoute('articles');
                 }
-            } else {
-                $article->setTitle($form->get('title')->getData());
-                $article->setDescription($form->get('description')->getData());
-                $article->setText($form->get('text')->getData());
-
-                $this->em->flush();
-                return $this->redirectToRoute('articles');
             }
         }
 
@@ -127,10 +143,15 @@ class ArticleController extends AbstractController
     public function delete($id): Response
     {
         $article = $this->articleRepository->find($id);
-        $this->em->remove($article);
-        $this->em->flush();
 
-        return $this->redirectToRoute('articles');
+        if ($this->getUser() === $article->getUser($id)) {
+            $this->em->remove($article);
+            $this->em->flush();
+
+            return $this->redirectToRoute('articles');
+        }
+
+        return $this->render('articles/show.html.twig', ['article' => $article]);
     }
 
 

@@ -39,6 +39,12 @@ class ArticleRepository extends ServiceEntityRepository
         }
     }
 
+    public function paginationQuery()
+    {
+        return $this->createQueryBuilder('a')
+            ->orderBy('a.id', 'ASC')
+            ->getQuery();
+    }
 //    /**
 //     * @return Article[] Returns an array of Article objects
 //     */
