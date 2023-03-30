@@ -25,7 +25,7 @@ class ArticleController extends AbstractController
     }
 
 
-    #[Route('/article', methods: ['GET'], name: 'articles')]
+    #[Route('/', methods: ['GET'], name: 'articles')]
     public function index(
         ArticleRepository $articleRepository,
         Request $request,
@@ -77,7 +77,7 @@ class ArticleController extends AbstractController
             $this->em->persist($newArticle);
             $this->em->flush();
 
-            return $this->redirectToRoute('articles');
+            return $this->redirectToRoute('/');
         }
 
         return $this->render('articles/create.html.twig', [
@@ -119,7 +119,7 @@ class ArticleController extends AbstractController
                         $article->setImagePath('/uploads/' . $newFileName);
                         $this->em->flush();
 
-                        return $this->redirectToRoute('articles');
+                        return $this->redirectToRoute('/');
                     }
                 } else {
                     $article->setTitle($form->get('title')->getData());
@@ -127,7 +127,7 @@ class ArticleController extends AbstractController
                     $article->setText($form->get('text')->getData());
 
                     $this->em->flush();
-                    return $this->redirectToRoute('articles');
+                    return $this->redirectToRoute('/');
                 }
             }
         }
@@ -148,7 +148,7 @@ class ArticleController extends AbstractController
             $this->em->remove($article);
             $this->em->flush();
 
-            return $this->redirectToRoute('articles');
+            return $this->redirectToRoute('/');
         }
 
         return $this->render('articles/show.html.twig', ['article' => $article]);
