@@ -25,7 +25,11 @@ class ArticleController extends AbstractController
     }
 
 
-    #[Route('/', methods: ['GET'], name: 'articles')]
+    #[Route(
+    path: '/', 
+    methods: ['GET'], 
+    name: 'articles'
+    )]
     public function index(
         ArticleRepository $articleRepository,
         Request $request,
@@ -45,7 +49,10 @@ class ArticleController extends AbstractController
     }
 
 
-    #[Route('/articles/create', name: 'create_article')]
+    #[Route(
+    path: '/articles/create', 
+    name: 'create_article'
+    )]
     public function create(Request $request): Response
     {
         $article = new Article();
