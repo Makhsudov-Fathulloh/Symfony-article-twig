@@ -93,7 +93,10 @@ class ArticleController extends AbstractController
     }
 
 
-    #[Route('/articles/edit/{id}', name: 'edit_article')]
+    #[Route(
+    '/articles/edit/{id}', 
+    name: 'edit_article'
+    )]
     public function edit($id, Request $request): Response
     {
         $article = $this->articleRepository->find($id);
